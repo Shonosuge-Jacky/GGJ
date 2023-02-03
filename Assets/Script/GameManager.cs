@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int leaf;
     public GameObject dialog;
+    
+    private TextAsset inkJSON;
 
     public GameState state;
 
@@ -54,7 +56,11 @@ public class GameManager : MonoBehaviour
     }
 
     void HandleEvent(){
-        dialog.SetActive(true);
         day++;
+        if(DialogueManager.getDialogueManager().dialogueIsPlaying == false){
+            inkJSON = (TextAsset) Resources.Load("Dialogue/Day" + day.ToString());
+            Debug.Log(inkJSON);
+            DialogueManager.getDialogueManager().EnterDialogueMode(inkJSON);
+        }
     }
 }
