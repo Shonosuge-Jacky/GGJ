@@ -35,11 +35,21 @@ public class GameManager : MonoBehaviour
 
     public void UpdateRoot(int value){
         root += value;
-        UpdateGameState(GameState.Event);
     }
     public void UpdateLeaf(int value){
         leaf += value;
+    }
+
+    public void NextDay(){
         UpdateGameState(GameState.Event);
+        StartCoroutine(DayTransition());
+    }
+
+    IEnumerator DayTransition(){
+        Debug.Log("change light");
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("change light done");
+        HandleEvent();
     }
 
     // Update is called once per frame
@@ -50,7 +60,6 @@ public class GameManager : MonoBehaviour
             case GameState.Planing:
                 break;
             case GameState.Event:
-                HandleEvent();
                 break;
         }
     }
