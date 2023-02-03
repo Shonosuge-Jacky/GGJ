@@ -9,8 +9,6 @@ public class NextDay_Btn : MonoBehaviour
     public void Update(){
         if(instance.state == GameState.Event){
             this.gameObject.SetActive(false);
-        }else{
-            this.gameObject.SetActive(true);
         }
     }
 

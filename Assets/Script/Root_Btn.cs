@@ -13,6 +13,8 @@ public class Root_Btn : MonoBehaviour
     public void Update(){
         if(instance.state == GameState.Event){
             this.GetComponent<Button>().enabled = false;
+        }else{
+            this.GetComponent<Button>().enabled = true;
         }
     }
 

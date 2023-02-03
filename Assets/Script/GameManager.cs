@@ -18,19 +18,29 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int leaf;
     public GameObject dialog;
-    
-    private TextAsset inkJSON;
-
     public GameState state;
+    [Header("ForReference")]
+    private TextAsset inkJSON;
+    public GameObject lighting;
+    public GameObject NextDayBtn;
+    [Header("Data")]
+    public Text CurrentDay;
+    public Text CurrentLeaf;
+    public Text CurrentRoot;
+
+
+  
 
     void Awake(){
         instance = this;
     }
+    
 
     // Start is called before the first frame update
     void Start()
     {
         UpdateGameState(GameState.Planing);
+        CurrentDay.text = "Day "+ day;
     }
 
     public void UpdateRoot(int value){
@@ -41,16 +51,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextDay(){
-        UpdateGameState(GameState.Event);
-        StartCoroutine(DayTransition());
+        if(state == GameState.Planing){
+            UpdateGameState(GameState.Event);
+            StartCoroutine(lighting.GetComponent<Lighting>().DayToNight());
+
+        }else{
+            StartCoroutine(lighting.GetComponent<Lighting>().NightToDay());
+        }
+        
     }
 
-    IEnumerator DayTransition(){
-        Debug.Log("change light");
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("change light done");
-        HandleEvent();
-    }
+
 
     // Update is called once per frame
 
@@ -64,12 +75,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void HandleEvent(){
-        day++;
+    public void HandleEvent(){
         if(DialogueManager.getDialogueManager().dialogueIsPlaying == false){
             inkJSON = (TextAsset) Resources.Load("Dialogue/Day" + day.ToString());
             Debug.Log(inkJSON);
             DialogueManager.getDialogueManager().EnterDialogueMode(inkJSON);
         }
+        day++;
+    }
+
+    public void HandlePlaning(){
+        UpdateGameState(GameState.Planing);
+        CurrentDay.text = "Day "+day;
+        NextDayBtn.SetActive(true);
     }
 }

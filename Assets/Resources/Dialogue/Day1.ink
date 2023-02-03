@@ -1,2 +1,6 @@
 Day 1
 XXXXXx
+XXXXXx
+XXX
+XX
+X

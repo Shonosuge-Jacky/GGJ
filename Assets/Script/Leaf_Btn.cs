@@ -8,12 +8,11 @@ public class Leaf_Btn : MonoBehaviour
     public GameObject Leaf;
     public GameManager instance;
 
-    private void Awake() {
-        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
     public void Update(){
         if(instance.state == GameState.Event){
             this.GetComponent<Button>().enabled = false;
+        }else{
+            this.GetComponent<Button>().enabled = true;
         }
     }
 
