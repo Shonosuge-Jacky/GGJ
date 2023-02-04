@@ -6,12 +6,17 @@ using Ink.Runtime;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField]
+    private float typingSpeed = 0.04f;
+    private Coroutine displayLineCoroutine;
+    private bool canContinueToNextLine = false;
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     private Story currentStory;  //ink package
     public bool dialogueIsPlaying;
     private static DialogueManager dialogueManager;
     public GameManager instance;
+    private bool IsignoreTyping;
 
 
     void Awake() {
@@ -33,7 +38,7 @@ public class DialogueManager : MonoBehaviour
         if(!dialogueIsPlaying){
             return;
         }
-        if(Input.GetButtonDown("Fire1")){
+        if(Input.GetKeyDown(KeyCode.Space) && canContinueToNextLine == true){
             ContinueStory();
         }
     }
@@ -46,6 +51,24 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    private IEnumerator DisplayLine(string line){
+        dialogueText.text = "";
+        canContinueToNextLine = false;
+        foreach(char letter in line.ToCharArray()){
+            if(letter == '<' || IsignoreTyping){
+                IsignoreTyping = true;
+            }else{
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            if(IsignoreTyping && letter == '>'){
+                IsignoreTyping = false;
+            }
+            
+        }
+        canContinueToNextLine = true;
+    }
+
     private void ExitDialogueMode(){
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -55,12 +78,13 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory(){
         if(currentStory.canContinue ){
-            dialogueText.text = currentStory.Continue();
+            if(displayLineCoroutine != null){
+                StopCoroutine(displayLineCoroutine);
+            }
+            displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
         }else{
             ExitDialogueMode();
         }
     }
-
-
 
 }
