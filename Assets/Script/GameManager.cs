@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum GameState{
     Planing,
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject lighting;
     public GameObject NextDayBtn;
     [Header("Data")]
-    public Text CurrentDay;
+    public TextMeshProUGUI CurrentDay;
     public Text CurrentLeaf;
     public Text CurrentRoot;
 
