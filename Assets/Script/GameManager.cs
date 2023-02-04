@@ -22,11 +22,11 @@ public class GameManager : MonoBehaviour
     int dayroot;
     [SerializeField]
     int dayleaf;
-    public int sugar;
+    public int sugar;                   //current have geh sugar
     [SerializeField]
-    int originalSugar;
+    int originalSugar;                  //for storing orginal sugar for reset function(CurrentSuagr will become this one)
     [SerializeField]
-    TextMeshProUGUI ToAddSugar;
+    TextMeshProUGUI ToAddSugar;         //text for showing adding sugar
     public GameObject dialog;
     public GameState state;
 
@@ -36,10 +36,10 @@ public class GameManager : MonoBehaviour
     public GameObject NextDayBtn;
 
     [Header("UI")]
-    public TextMeshProUGUI CurrentDay;
-    public TextMeshProUGUI CurrentLeaf;
-    public TextMeshProUGUI CurrentRoot;
-    public TextMeshProUGUI CurrentSugar;
+    public TextMeshProUGUI CurrentDay;  //text for showing current day
+    public TextMeshProUGUI CurrentLeaf; //text for showing current added Leaf (can be reset)
+    public TextMeshProUGUI CurrentRoot; //text for showing current added root (can be reset)
+    public TextMeshProUGUI CurrentSugar; //text for showing current sugar (can be change, can can be reset -> originalSugar);
     public Image[] leaves;
     public Image[] roots;
   
@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
     
-
     // Start is called before the first frame update
     void Start()
     {
@@ -116,7 +115,7 @@ public class GameManager : MonoBehaviour
 
             //from Night to Day
             Debug.Log("DAY: " + day);
-            //handle everyday event
+            //handle everyday special event and every gv sugar
             switch (day){
                 case 1:
                     StartCoroutine(AddSugarEvent(3));
@@ -211,8 +210,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         CurrentSugar.text = sugar.ToString();
         ToAddSugar.gameObject.SetActive(false);
-        
-        
     }
 
 }
