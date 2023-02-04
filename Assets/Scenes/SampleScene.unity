@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 169870975}
   - component: {fileID: 169870974}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,7 +1634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &447972725
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2427,6 +2427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdab900aeb9e26245876f36e08a780f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingSpeed: 0.04
   dialoguePanel: {fileID: 136390526}
   dialogueText: {fileID: 169870974}
   dialogueIsPlaying: 0
@@ -6292,6 +6293,8 @@ MonoBehaviour:
   leaf: 0
   dayroot: 0
   dayleaf: 0
+  sugar: 0
+  ToAddSugar: {fileID: 447972726}
   dialog: {fileID: 136390526}
   state: 0
   lighting: {fileID: 173311845}
@@ -6299,6 +6302,7 @@ MonoBehaviour:
   CurrentDay: {fileID: 581749068}
   CurrentLeaf: {fileID: 226894914}
   CurrentRoot: {fileID: 1406392040}
+  CurrentSugar: {fileID: 1130147692}
   leaves:
   - {fileID: 1551797217}
   - {fileID: 465954433}

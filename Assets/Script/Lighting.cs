@@ -23,6 +23,7 @@ public class Lighting : MonoBehaviour
     }
 
     public IEnumerator NightToDay(){
+        Debug.Log("---");
         for(float i = 0.8f; i >= 0f; i -= 0.02f){
             Color c = this.GetComponent<Image>().color;
             c.a = i;

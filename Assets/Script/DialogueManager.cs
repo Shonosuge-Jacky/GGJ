@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Ink.Runtime;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private static DialogueManager dialogueManager;
     public GameManager instance;
     private bool IsignoreTyping;
+    private bool IntroEnd = false;
 
 
     void Awake() {
@@ -73,7 +75,11 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
-        instance.NextDay();
+        if(IntroEnd){
+            instance.NextDay();
+        }else{
+            IntroEnd = true;
+        }
     }
 
     private void ContinueStory(){

@@ -10,6 +10,8 @@ public class Reset_Btn : MonoBehaviour
     public void Update(){
         if(instance.state == GameState.Event && this.gameObject.activeSelf){
             StartCoroutine(DisableItself());
+        }else{
+            this.GetComponent<Button>().enabled = true;
         }
     }
 
