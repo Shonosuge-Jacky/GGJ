@@ -9,6 +9,7 @@ public class Root_Btn : MonoBehaviour
     public GameObject Root_2;
     public GameObject Root_3;
     public GameManager instance;
+    public GameObject ResetBtn;
 
     public void Update(){
         if(instance.state == GameState.Event){
@@ -21,6 +22,9 @@ public class Root_Btn : MonoBehaviour
     public void addRoot()
     {
         Root_2.SetActive(true);
+        if(ResetBtn.activeSelf == false){
+            ResetBtn.SetActive(true);
+        }
         Debug.Log("Root Added");
         instance.UpdateDayRoot(1);
     }
