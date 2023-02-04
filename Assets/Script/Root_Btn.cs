@@ -22,6 +22,6 @@ public class Root_Btn : MonoBehaviour
     {
         Root_2.SetActive(true);
         Debug.Log("Root Added");
-        instance.UpdateRoot(1);
+        instance.UpdateDayRoot(1);
     }
 }

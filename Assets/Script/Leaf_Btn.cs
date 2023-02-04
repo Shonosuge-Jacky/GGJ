@@ -20,6 +20,6 @@ public class Leaf_Btn : MonoBehaviour
     {
         Leaf.SetActive(true);
         Debug.Log("Leaf Added");
-        instance.UpdateLeaf(1);
+        instance.UpdateDayLeaf(1);
     }
 }
